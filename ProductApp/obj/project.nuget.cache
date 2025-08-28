@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "bNbrNMPpiFw=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Alhammi\\Code-Repository\\cs-basic-doodles\\ProductApp\\ProductApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Alhammi\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

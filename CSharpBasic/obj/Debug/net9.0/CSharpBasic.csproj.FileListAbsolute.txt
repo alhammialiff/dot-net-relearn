@@ -1,0 +1,17 @@
+C:\Users\Alhammi\Code-Repository\cs-basic-doodles\CSharpBasic\bin\Debug\net9.0\CSharpBasic.exe
+C:\Users\Alhammi\Code-Repository\cs-basic-doodles\CSharpBasic\bin\Debug\net9.0\CSharpBasic.deps.json
+C:\Users\Alhammi\Code-Repository\cs-basic-doodles\CSharpBasic\bin\Debug\net9.0\CSharpBasic.runtimeconfig.json
+C:\Users\Alhammi\Code-Repository\cs-basic-doodles\CSharpBasic\bin\Debug\net9.0\CSharpBasic.dll
+C:\Users\Alhammi\Code-Repository\cs-basic-doodles\CSharpBasic\bin\Debug\net9.0\CSharpBasic.pdb
+C:\Users\Alhammi\Code-Repository\cs-basic-doodles\CSharpBasic\obj\Debug\net9.0\CSharpBasic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Alhammi\Code-Repository\cs-basic-doodles\CSharpBasic\obj\Debug\net9.0\CSharpBasic.AssemblyInfoInputs.cache
+C:\Users\Alhammi\Code-Repository\cs-basic-doodles\CSharpBasic\obj\Debug\net9.0\CSharpBasic.AssemblyInfo.cs
+C:\Users\Alhammi\Code-Repository\cs-basic-doodles\CSharpBasic\obj\Debug\net9.0\CSharpBasic.csproj.CoreCompileInputs.cache
+C:\Users\Alhammi\Code-Repository\cs-basic-doodles\CSharpBasic\obj\Debug\net9.0\CSharpBasic.dll
+C:\Users\Alhammi\Code-Repository\cs-basic-doodles\CSharpBasic\obj\Debug\net9.0\refint\CSharpBasic.dll
+C:\Users\Alhammi\Code-Repository\cs-basic-doodles\CSharpBasic\obj\Debug\net9.0\CSharpBasic.pdb
+C:\Users\Alhammi\Code-Repository\cs-basic-doodles\CSharpBasic\obj\Debug\net9.0\CSharpBasic.genruntimeconfig.cache
+C:\Users\Alhammi\Code-Repository\cs-basic-doodles\CSharpBasic\obj\Debug\net9.0\ref\CSharpBasic.dll
+C:\Users\Alhammi\Code-Repository\cs-basic-doodles\CSharpBasic\bin\Debug\net9.0\Newtonsoft.Json.dll
+C:\Users\Alhammi\Code-Repository\cs-basic-doodles\CSharpBasic\obj\Debug\net9.0\CSharpBasic.csproj.AssemblyReference.cache
+C:\Users\Alhammi\Code-Repository\cs-basic-doodles\CSharpBasic\obj\Debug\net9.0\CSharpBa.AA6600A9.Up2Date
