@@ -40,3 +40,4 @@ C:\Users\Alhammi\Code-Repository\cs-basic-doodles\MyWebAPI\obj\Debug\net9.0\refi
 C:\Users\Alhammi\Code-Repository\cs-basic-doodles\MyWebAPI\obj\Debug\net9.0\MyWebAPI.pdb
 C:\Users\Alhammi\Code-Repository\cs-basic-doodles\MyWebAPI\obj\Debug\net9.0\MyWebAPI.genruntimeconfig.cache
 C:\Users\Alhammi\Code-Repository\cs-basic-doodles\MyWebAPI\obj\Debug\net9.0\ref\MyWebAPI.dll
+C:\Users\Alhammi\Code-Repository\cs-basic-doodles\MyWebAPI\obj\Debug\net9.0\MyWebAPI.sourcelink.json

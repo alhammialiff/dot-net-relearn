@@ -1,42 +1,74 @@
 var builder = WebApplication.CreateBuilder(args);
 
+// ====================================
 // Add services to the container.
+// ====================================
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 // builder.Services.AddOpenApi();
-builder.Services.AddControllers();
+// builder.Services.AddControllers();
+builder.Services.AddHttpLogging((o) => {});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-// if (app.Environment.IsDevelopment())
-// {
-//     app.MapOpenApi();
-// }
 
-// app.UseHttpsRedirection();
+// app.UseAuthorization();
+// app.MapControllers();
+// app.UseHttpLogging();
 
-// var summaries = new[]
-// {
-//     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-// };
+// The output:
+// Logic before 1
+// Logic before 2
+// Logic before 3
+// Logic after 3
+// Logic after 2
+// Logic after 1
 
-// app.MapGet("/weatherforecast", () =>
-// {
-//     var forecast =  Enumerable.Range(1, 5).Select(index =>
-//         new WeatherForecast
-//         (
-//             DateTime.FromDateTime(DateTime.Now.AddDays(index)),
-//             Random.Shared.Next(-20, 55),
-//             summaries[Random.Shared.Next(summaries.Length)]
-//         ))
-//         .ToArray();
-//     return forecast;
-// })
-// .WithName("GetWeatherForecast");
+// Why it runs that way?
+// It runs in a nested function way, or LIFO.
+// 
+// Behind the scenes .NET runs these before our codes-:
+// (1) app.UseRouting()
+//   - Logic needed to run all the diff routes
+//   - Runs before our routes below (/, /hello etc.)
+// (2) app.UseAuthentication()  
+// (3) app.UseAuthorization() 
+//   - (2) and (3) will run to check if we have any services
+//    need requires it
+// (4) app.UseExceptionHandler() 
+//   - Only runs in development env
+// 
+// THEN, .NET runs this after our code
+// (5) app.UseEndpoints();
 
-app.UseAuthorization();
+app.Use(async (context, next) =>
+{
+    // Can add logic here
+    Console.WriteLine("Logic before 1");
+    await next.Invoke();
+    Console.WriteLine("Logic after 1");
+    // Can add logic here
+});
+app.Use(async (context, next) =>
+{
+    // Can add logic here
+    Console.WriteLine("Logic before 2");
+    await next.Invoke();
+    Console.WriteLine("Logic after 2");
+    // Can add logic here
+});
+app.Use(async (context, next) =>
+{
+    // Can add logic here
+    Console.WriteLine("Logic before 3");
+    await next.Invoke();
+    Console.WriteLine("Logic after 3");
+    // Can add logic here
+});
 
-app.MapControllers();
+app.MapGet("/", () => "Hello World!");
+app.MapGet("/hello", () => "This is the hello route!");
+
+
 
 app.Run();
 

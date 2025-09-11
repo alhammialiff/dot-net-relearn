@@ -64,7 +64,8 @@ public class WeatherForecastController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id) {
+    public IActionResult Delete(int id)
+    {
 
         // Delete data for the given ID
         return NoContent();
