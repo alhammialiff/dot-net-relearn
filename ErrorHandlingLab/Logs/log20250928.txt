@@ -1,0 +1,10 @@
+2025-09-28 21:02:15.234 +08:00 [INF] Now listening on: http://localhost:5192
+2025-09-28 21:02:15.257 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-28 21:02:15.258 +08:00 [INF] Hosting environment: Development
+2025-09-28 21:02:15.258 +08:00 [INF] Content root path: C:\Users\Alhammi\Code-Repository\cs-basic-doodles\ErrorHandlingLab
+2025-09-28 21:02:21.818 +08:00 [INF] Application is shutting down...
+2025-09-28 21:02:53.279 +08:00 [INF] Now listening on: http://localhost:5192
+2025-09-28 21:02:53.307 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-28 21:02:53.308 +08:00 [INF] Hosting environment: Development
+2025-09-28 21:02:53.308 +08:00 [INF] Content root path: C:\Users\Alhammi\Code-Repository\cs-basic-doodles\ErrorHandlingLab
+2025-09-28 21:03:03.610 +08:00 [INF] Application is shutting down...
