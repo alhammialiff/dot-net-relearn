@@ -1,0 +1,6 @@
+@ErrorHandlingProject_HostAddress = http://localhost:5094
+
+GET {{ErrorHandlingProject_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
