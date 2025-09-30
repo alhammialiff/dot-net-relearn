@@ -20,6 +20,7 @@ public class ErrorHandlingController : ControllerBase
     [HttpGet("division")]
     public IActionResult GetDivisionResult(int numerator, int denominator)
     {
+
         try
         {
             // Attempt to divide numerator by denominator
@@ -37,6 +38,7 @@ public class ErrorHandlingController : ControllerBase
             // Return 400 Bad Request with error message
             return BadRequest("Error: Division by zero is not allowed");
         }
+
     }
 }
 
