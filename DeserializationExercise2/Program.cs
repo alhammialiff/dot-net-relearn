@@ -57,7 +57,7 @@ public class Program
         /************************
         * Time for XML Deserialization
         *************************/
-        // Stopwatch stopwatch = Stopwatch.StartNew();
+        stopwatch.Start();
         // ---------------------
 
 
@@ -81,7 +81,7 @@ public class Program
         /************************
         * Time for JSON Deserialization
         *************************/
-        // Stopwatch stopwatch = Stopwatch.StartNew();
+        stopwatch.Start();
         // ---------------------
 
         var jsonData = File.ReadAllText("person.json");
