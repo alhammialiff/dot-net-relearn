@@ -92,9 +92,9 @@ public class Program
         stopwatch.Stop();
 
         Console.WriteLine(
-            $"XML Deserialization - UserName: {deserializedPersonJson.UserName}, UserAge: {deserializedPersonJson.UserAge}"
+            $"JSON Deserialization - UserName: {deserializedPersonJson.UserName}, UserAge: {deserializedPersonJson.UserAge}"
         );
-        Console.WriteLine($"XML Deserialization took {stopwatch.ElapsedMilliseconds} ms");
+        Console.WriteLine($"JSON Deserialization took {stopwatch.ElapsedMilliseconds} ms");
 
 
     }
