@@ -1,0 +1,11 @@
+GET http://localhost:5005/blogs
+
+###
+POST http://localhost:5005/blogs
+Content-Type: application/json
+X-Api-Key: thisIsABadPasswordExampleUseEnv
+
+{
+    "title":"my title",
+    "body":"my body"
+}
