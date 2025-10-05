@@ -1,0 +1,6 @@
+@BuiltInMiddlewareExercise_HostAddress = http://localhost:5094
+
+GET {{BuiltInMiddlewareExercise_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
