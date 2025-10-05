@@ -9,3 +9,6 @@ X-Api-Key: thisIsABadPasswordExampleUseEnv
     "title":"my title",
     "body":"my body"
 }
+
+###
+DELETE http://localhost:5005/

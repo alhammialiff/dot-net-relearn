@@ -1,4 +1,14 @@
+using System.Reflection.Metadata.Ecma335;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.OpenApi;
+using Swashbuckle.AspNetCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Add Swagger services BEFORE building the app
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
 
 
@@ -9,6 +19,19 @@ var blogs = new List<Blog>
     new Blog{ Title = "My Second Post", Body = "This is my second post"}
 };
 
+// Only trigger Swagger and its UI in dev mode
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+/*******************************
+* This middleware pipeline example performs
+* (1) Process timer method
+* (2) Prints Request Information (path)
+* (3) Authorization check
+*******************************/
 
 /*******************************
 * #1 Request Pipeline Timer Middleware
@@ -40,18 +63,27 @@ app.Use(async (context, next) =>
 * #3 UseWhen Conditional Middleware Example
 *******************************/
 app.UseWhen(
+
+    // The Condition:
+    // Only trigger this ware on methods other than GET
     context => context.Request.Method != "GET",
+
+    // Middleware configuration 
+    // This is the middleware when condition is truthy
     appBuilder => appBuilder.Use( async (context, next) =>
     {
 
+        // Extracts X-API-Key header
         var extractedPassword = context.Request.Headers["X-Api-Key"];
 
+        // If authenticated, continue pipeline
         if (extractedPassword == "thisIsABadPasswordExampleUseEnv")
         {
             await next.Invoke();
         }
         else
-        {
+        {   
+            // Send an Unauthorized Code
             context.Response.StatusCode = 401;
             await context.Response.WriteAsync("Invalid API Key");
         }
@@ -70,16 +102,26 @@ app.MapGet("/blogs", () =>
 });
 
 // Get blog by ID
-app.MapGet("/blogs/{id}", (int id) =>
+// The addition of strong-typed return declaration also
+// allows OpenAPI to correctly deduce it in Swagger doc.
+app.MapGet("/blogs/{id}", Results<Ok<Blog>, NotFound> (int id) =>
 {
     if (id < 0 || id >= blogs.Count)
     {
-        return Results.NotFound();
+        return TypedResults.NotFound();
     }
     else
     {
-        return Results.Ok(blogs[id]);
+        return TypedResults.Ok(blogs[id]);
     }
+
+// Added OpenAPI chaining to document what this API handler does.
+}).WithOpenApi(operation =>
+{
+    operation.Parameters[0].Description = "The ID of the blog to retrieve.";
+    operation.Summary = "Get single blog";
+    operation.Description = "Returns a single blog";
+    return operation;
 });
 
 // Add blog
