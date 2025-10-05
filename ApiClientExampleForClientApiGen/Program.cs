@@ -39,7 +39,7 @@
 
 
 /********************************
-* [Better way] Generating API Client
+* [Better way] Generating API Client via NSwag
 * We only need to run this code once to generate. To do this we need
 * (1) ClientGenerator.cs - The config script to set up the API Client generation task
 * (2) BlogApiClient.cs - The generated script to generate API Client

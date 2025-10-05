@@ -16,6 +16,7 @@ public class SwaggerClientGenerator
 
         var document = await OpenApiDocument.FromJsonAsync(swaggerJson);
 
+        // There is also a support for Typescript!
         var settings = new CSharpClientGeneratorSettings
         {
             ClassName = "BlogApiClient",
@@ -29,6 +30,6 @@ public class SwaggerClientGenerator
         var code = generator.GenerateFile();
 
         await File.WriteAllTextAsync("BlogApiClient.cs", code);
-        
+
     }
 }
