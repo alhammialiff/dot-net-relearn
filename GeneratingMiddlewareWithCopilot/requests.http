@@ -1,0 +1,7 @@
+GET http://localhost:5065
+###
+
+GET http://localhost:5065/weatherforecast
+
+###
+GET http://localhost:5065/__route-counts
