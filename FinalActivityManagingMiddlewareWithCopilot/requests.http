@@ -1,0 +1,28 @@
+### Register new user
+POST http://localhost:5227/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "newuser",
+  "email": "newuser@example.com", 
+  "password": "password123",
+  "role": "User"
+}
+
+### Login as admin
+POST http://localhost:5227/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin123"
+}
+
+### Unauthorized Login as admin
+POST http://localhost:5227/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin123444"
+}

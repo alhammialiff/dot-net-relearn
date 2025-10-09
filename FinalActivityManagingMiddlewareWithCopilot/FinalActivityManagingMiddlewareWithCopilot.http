@@ -1,0 +1,93 @@
+@baseUrl = https://localhost:7238
+@token = 
+
+### Test public endpoint (no auth required)
+GET {{baseUrl}}/weatherforecast
+Accept: application/json
+
+### Register new user
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "newuser",
+  "email": "newuser@example.com", 
+  "password": "password123",
+  "role": "User"
+}
+
+### Login as admin (credentials: admin/admin123)
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin123"
+}
+
+### Login as regular user (credentials: user/user123)  
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "user",
+  "password": "user123"
+}
+
+### Login with invalid credentials (should fail)
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "wrongpassword"
+}
+
+### Get all users (requires authentication)
+GET {{baseUrl}}/api/users
+Authorization: Bearer {{token}}
+
+### Get user by ID (requires authentication)
+GET {{baseUrl}}/api/users/1
+Authorization: Bearer {{token}}
+
+### Get current user profile (requires authentication)
+GET {{baseUrl}}/api/users/profile
+Authorization: Bearer {{token}}
+
+### Delete user (requires admin or self)
+DELETE {{baseUrl}}/api/users/2
+Authorization: Bearer {{token}}
+
+### Access protected endpoint without token (should fail with 401)
+GET {{baseUrl}}/api/users
+
+### Access protected endpoint with invalid token (should fail with 401)
+GET {{baseUrl}}/api/users  
+Authorization: Bearer invalid-token
+
+### Register user with duplicate username (should fail)
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "email": "admin2@example.com",
+  "password": "password123"
+}
+
+### Register user with invalid data (should fail)
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "",
+  "email": "invalid-email", 
+  "password": "123"
+}
+
+### Get non-existent user (should fail with 404)
+GET {{baseUrl}}/api/users/999
+Authorization: Bearer {{token}}
+
+###
