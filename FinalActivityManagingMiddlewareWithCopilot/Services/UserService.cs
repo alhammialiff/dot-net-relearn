@@ -5,60 +5,79 @@ using FinalActivityManagingMiddlewareWithCopilot.Middleware;
 
 namespace FinalActivityManagingMiddlewareWithCopilot.Services;
 
+// Interface defining user management operations
+// This allows for dependency injection and makes testing easier
 public interface IUserService
 {
-    Task<UserDto> RegisterUserAsync(RegisterDto registerDto);
-    Task<LoginResponseDto> LoginAsync(LoginDto loginDto);
-    Task<List<UserDto>> GetAllUsersAsync();
-    Task<UserDto?> GetUserByIdAsync(int id);
-    Task<UserDto?> GetUserByUsernameAsync(string username);
-    Task<bool> DeleteUserAsync(int id);
+    Task<UserDto> RegisterUserAsync(RegisterDto registerDto);           // Create new user account
+    Task<LoginResponseDto> LoginAsync(LoginDto loginDto);               // Authenticate user and return JWT token
+    Task<List<UserDto>> GetAllUsersAsync();                            // Get all active users
+    Task<UserDto?> GetUserByIdAsync(int id);                           // Get specific user by ID
+    Task<UserDto?> GetUserByUsernameAsync(string username);            // Get specific user by username
+    Task<bool> DeleteUserAsync(int id);                                // Soft delete user (set inactive)
 }
 
+// User Service implementation - handles all user management operations
+// Note: Uses in-memory storage for demo - in production, use a database
 public class UserService : IUserService
 {
-    private readonly List<User> _users = new(); // In-memory storage for demo
+    // In-memory list to store users (for demo purposes only)
+    // In production, this would be replaced with database access (Entity Framework, etc.)
+    private readonly List<User> _users = new();
+    
+    // JWT service for generating authentication tokens
     private readonly IJwtService _jwtService;
+    // Logger for user management events
     private readonly ILogger<UserService> _logger;
+    // Simple counter for generating unique user IDs
     private int _nextId = 1;
 
+    // Constructor: Dependency injection and initial data setup
     public UserService(IJwtService jwtService, ILogger<UserService> logger)
     {
         _jwtService = jwtService;
         _logger = logger;
         
-        // Seed some initial data
+        // Create some initial test users for demo purposes
         SeedInitialUsers();
     }
 
+    // Register a new user account
     public async Task<UserDto> RegisterUserAsync(RegisterDto registerDto)
     {
-        // Check if username already exists
+        // Business rule validation: Check if username already exists
+        // Use case-insensitive comparison to prevent "Admin" and "admin" both existing
         if (_users.Any(u => u.Username.Equals(registerDto.Username, StringComparison.OrdinalIgnoreCase)))
         {
             throw new ValidationException("Username already exists");
         }
 
-        // Check if email already exists
+        // Business rule validation: Check if email already exists
+        // Prevent duplicate email addresses in the system
         if (_users.Any(u => u.Email.Equals(registerDto.Email, StringComparison.OrdinalIgnoreCase)))
         {
             throw new ValidationException("Email already exists");
         }
 
+        // Create new user entity
         var user = new User
         {
-            Id = _nextId++,
-            Username = registerDto.Username,
-            Email = registerDto.Email,
-            PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerDto.Password),
-            Role = registerDto.Role,
-            CreatedAt = DateTime.UtcNow,
-            IsActive = true
+            Id = _nextId++,                                                 // Assign unique ID
+            Username = registerDto.Username,                                // Store username
+            Email = registerDto.Email,                                      // Store email
+            PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerDto.Password), // Hash password securely (never store plaintext!)
+            Role = registerDto.Role,                                        // Assign role (Admin/User)
+            CreatedAt = DateTime.UtcNow,                                   // Record creation timestamp
+            IsActive = true                                                 // New users are active by default
         };
 
+        // Add to in-memory storage (in production: save to database)
         _users.Add(user);
+        
+        // Log successful registration for auditing
         _logger.LogInformation("User registered: {Username}", user.Username);
 
+        // Convert internal User entity to public UserDto and return
         return await Task.FromResult(MapToDto(user));
     }
 
